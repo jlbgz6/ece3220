@@ -4,11 +4,18 @@
 
 #define MAX 20
 
+void Scale(char, double);
+
+
 int main(int argc, char** argv){
 
 char name[MAX] = "raw_data_";
-
 char name1[MAX];
+char* end;
+double offset;
+int offFlag = 0;
+double scale;
+int scaleflag;
 
 for(int i=1; i<argc; i++){
 	
@@ -18,9 +25,13 @@ for(int i=1; i<argc; i++){
 	 }
 	 else if(strcmp(argv[i],"-o") == 0){
 		printf("\nWe have the offset\n");
-	 }
+		offset = strtod(argv[i+1], &end)
+		offFlag = 1;	 
+	}
 	 else if(strcmp(argv[i],"-s") == 0){
 		printf("\nWe have the scale factor\n");
+		scale = strtod(argv[i+1], &end);
+		scaleFlag  = 1;
 	 }
  	else if(strcmp(argv[i],"-h") == 0){
 		printf("\nWe have the help option\n");
@@ -45,13 +56,17 @@ strcat(name, name2);
 
 printf("\nthe filename is %s", name);
 
+if(scaleFlag == 1){
+	Scale(name, scale);
+}
+
+
 return 0;
 
 
 }
-/*
-int scale(int argc, int scale, char** argv){
 
+void scale(char fileName, double scale){
 
 }
 
